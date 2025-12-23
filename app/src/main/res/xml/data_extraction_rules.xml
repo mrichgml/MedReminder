@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup disableIfUserInitiatedEncryption="true">
+        <exclude domain="sharedpref" path="secure_preferences.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="database" database="med_reminder_database.db" />
+    </device-transfer>
+</data-extraction-rules>

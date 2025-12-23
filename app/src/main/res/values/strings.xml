@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MedReminder</string>
+    <string name="add_medication">Add Medication</string>
+    <string name="edit_medication">Edit Medication</string>
+    <string name="delete_medication">Delete</string>
+    <string name="medication_name">Medication Name</string>
+    <string name="dosage">Dosage</string>
+    <string name="min_time_between_doses">Min Time Between Doses (minutes)</string>
+    <string name="max_doses_per_day">Max Doses Per 24 Hours</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="last_taken">Last taken: %s</string>
+    <string name="never_taken">Never taken</string>
+    <string name="dose_available">Dose available</string>
+    <string name="dose_not_available">Dose not available</string>
+    <string name="no_medications">No medications configured</string>
+    <string name="confirm_delete">Are you sure you want to delete this medication?</string>
+</resources>

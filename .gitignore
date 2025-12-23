@@ -1,0 +1,13 @@
+*.apk
+*.aab
+build/
+.gradle/
+local.properties
+.idea/
+*.iml
+.DS_Store
+*.swp
+*.swo
+*~
+.env
+.env.local
