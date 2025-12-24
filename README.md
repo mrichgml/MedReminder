@@ -1,23 +1,36 @@
-
 # MedReminder Android App
 
 A simple yet effective Android application for tracking medication intake. Users can configure up to 8 medications and receive visual feedback on dose availability.
 
 ## Features
 
-- **Configure Up to 8 Medications**: Add and manage multiple medications with custom settings
-- **Dosage Tracking**: Track dosage information for each medication
-- **Smart Dose Availability**: 
-  - Green button: Dose is available (minimum time elapsed and daily limit not reached)
-  - Red button: Dose is not available (too soon or daily limit reached)
-- **Time Between Doses**: Set minimum time required between doses
-- **Daily Limits**: Configure maximum doses per 24-hour period
-- **Dose History**: View when each medication was last taken
-- **Local Data Persistence**: All data is stored locally on device
+- Configure up to 8 medications with custom settings
+- Dosage tracking per medication
+- Smart dose availability with clear colors:
+  - Green button: dose is available (minimum time elapsed and daily limit not reached)
+  - Red button: dose is not available (too soon or daily limit reached)
+- Minimum time between doses in hours (supports fractional hours, e.g. 0.5, 1.5)
+- Daily limits: maximum doses per rolling 24 hours
+- Per‑medication notifications when the next dose becomes available (optional)
+- Automatic UI refresh: buttons update every minute while the app is open
+- Time display options:
+  - Show actual “Earliest Next” time or a countdown (e.g. "3h 45m")
+  - Toggle between 12‑hour (AM/PM) and 24‑hour clock
+- Local data persistence (Room/SQLite)
+
+## What each medication button shows
+
+- Medication name
+- Taken: the time the last dose was taken
+- Earliest Next: either
+  - the next available time (respecting the minimum interval), or
+  - a live countdown until that time (if countdown mode is enabled)
+
+Buttons automatically turn green at the eligible time—no manual refresh needed.
 
 ## Project Structure
 
-```
+```text
 MedReminder/
 ├── app/
 │   ├── src/
@@ -33,11 +46,16 @@ MedReminder/
 │   │   │   │   ├── models/            # Data Models
 │   │   │   │   │   ├── Medication.kt
 │   │   │   │   │   └── Dose.kt
+│   │   │   │   ├── notifications/     # Background checks + notifications
+│   │   │   │   │   ├── MedicationCheckWorker.kt
+│   │   │   │   │   ├── NotificationHelper.kt
+│   │   │   │   │   └── NotificationScheduler.kt
 │   │   │   │   ├── ui/                # UI Components
 │   │   │   │   │   ├── MainActivity.kt
 │   │   │   │   │   ├── MedicationButtonView.kt
 │   │   │   │   │   └── MedicationDialog.kt
-│   │   │   │   └── utils/             # Utilities
+│   │   │   │   └── utils/             # Utilities & preferences
+│   │   │   │       ├── PreferencesManager.kt
 │   │   │   │       └── TimeFormatter.kt
 │   │   │   ├── res/                   # Resources
 │   │   │   │   ├── layout/
@@ -54,11 +72,12 @@ MedReminder/
 
 ## Technology Stack
 
-- **Language**: Kotlin
-- **Database**: Room (SQLite)
-- **Async**: Coroutines & Flow
-- **UI**: Android Material Design
-- **Architecture**: Repository Pattern with Clean Architecture principles
+- Language: Kotlin
+- Database: Room (SQLite)
+- Async: Coroutines & Flow
+- UI: Android Material Design
+- Background work: WorkManager (periodic checks for notifications)
+- Architecture: Repository Pattern with Clean Architecture principles
 
 ## Getting Started
 
@@ -71,45 +90,69 @@ MedReminder/
 
 ### Build & Run
 
-1. Clone the repository
-2. Open in Android Studio
-3. Build the project:
-   ```bash
-   ./gradlew build
-   ```
-4. Run on emulator or device:
-   ```bash
-   ./gradlew installDebug
-   ```
+On Windows PowerShell:
+
+```powershell
+# Build debug
+.\gradlew.bat assembleDebug
+
+# Install on connected device
+.\gradlew.bat installDebug
+```
+
+On macOS/Linux:
+
+```bash
+./gradlew assembleDebug
+./gradlew installDebug
+```
 
 ### Build Variants
 
-- **Debug**: Development build with debugging enabled
-- **Release**: Optimized release build with ProGuard
+- Debug: development build with debugging enabled
+- Release: optimized, signed build (ProGuard + resource shrinking)
 
 ## How to Use
 
-### Adding a Medication
+### Adding a medication
 
-1. Tap the "Add Medication" button
-2. Enter medication details:
-   - **Name**: Medication name (e.g., Aspirin)
-   - **Dosage**: Dosage information (e.g., 500mg)
-   - **Min Time Between Doses**: Minimum minutes between doses
-   - **Max Doses Per 24 Hours**: Maximum number of doses allowed in a day
-3. Tap "Save"
+1. Tap “Add Medication”
+2. Enter details:
+   - Name (e.g., Aspirin)
+   - Dosage (e.g., 500mg)
+   - Min Time Between Doses (hours; decimals allowed, e.g., 0.5)
+   - Max Doses Per 24 Hours
+3. Optionally enable notifications for that medication
+4. Tap “Save”
 
-### Taking a Dose
+### Taking a dose
 
-1. When a button is **green**, the dose is available
-2. Tap the medication button to record taking the dose
-3. The button will turn **red** if dose limits are reached or minimum time hasn't elapsed
-4. The display shows the medication name and time of last dose
+- When a button is green, tap it to record a dose
+- Button turns red after taking a dose or when limits are reached
+- The button displays:
+  - Medication name
+  - Taken: last dose time
+  - Earliest Next: next time or a countdown (depending on your setting)
 
-### Editing/Deleting Medications
+### Editing/deleting
 
-- Tap "Edit" on a medication to modify its settings
-- Tap "Delete" to remove a medication and all associated dose history
+- Tap “Edit” to modify settings
+- Tap “Delete” to remove the medication (and its dose history)
+
+## Settings & Preferences
+
+Open the menu (⋮) to toggle:
+
+- Show Countdown: switch between showing a countdown or the exact "Earliest Next" time
+- Use 24‑Hour Format: switch between 12‑hour (AM/PM) and 24‑hour time
+
+These preferences are saved and applied across the app.
+
+## Notifications
+
+- Optional per‑medication notifications alert you when the next dose becomes available
+- Background checks run periodically using WorkManager (no server required)
+- On Android 13+, the app requests notification permission on first launch
 
 ## Database Schema
 
@@ -117,29 +160,25 @@ MedReminder/
 - `id`: Primary key
 - `name`: Medication name
 - `dosage`: Dosage information
-- `minTimeBetweenDoses`: Minimum minutes between doses
-- `maxDosesPerDay`: Max doses in 24 hours
+- `minTimeBetweenDoses`: Minimum hours between doses (Double; supports fractional hours)
+- `maxDosesPerDay`: Max doses in rolling 24 hours
 - `createdAt`: Timestamp of creation
 - `isActive`: Active status flag
+- `notificationsEnabled`: Whether notifications are enabled for this medication
 
 ### Doses Table
 - `id`: Primary key
 - `medicationId`: Foreign key to Medication
-- `timestamp`: When dose was taken
+- `timestamp`: When dose was taken (epoch millis)
 
-## Architecture
+## Availability Logic
 
-### Repository Pattern
-The `MedicationRepository` provides a clean abstraction layer between the UI and database operations, handling all data access logic.
-
-### Availability Logic
-`DoseAvailabilityChecker` encapsulates the business logic for determining if a dose can be taken based on:
-- Whether the minimum time between doses has elapsed
-- Whether the daily dose limit has been reached
+`DoseAvailabilityChecker` determines if a dose can be taken based on:
+- Minimum time (hours) since last dose
+- Daily maximum doses per 24 hours
 
 ## Future Enhancement Ideas
 
-- Notifications/reminders for due medications
 - Dose history statistics and graphs
 - Multiple users/profiles
 - Cloud synchronization
@@ -151,4 +190,4 @@ This project is open source and available under the MIT License.
 
 ## Support
 
-For issues, questions, or feature requests, please contact the development team or create an issue on GitHub.
+For issues, questions, or feature requests, please create an issue on GitHub.
