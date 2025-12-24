@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/min_time_between_doses"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_marginBottom="12dp" />
 
     <EditText
@@ -35,6 +35,13 @@
         android:layout_height="wrap_content"
         android:hint="@string/max_doses_per_day"
         android:inputType="number"
+        android:layout_marginBottom="12dp" />
+
+    <CheckBox
+        android:id="@+id/cbEnableNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enable_notifications"
         android:layout_marginBottom="16dp" />
 
     <LinearLayout
@@ -48,13 +55,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save" />
+            android:text="@string/save"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </LinearLayout>

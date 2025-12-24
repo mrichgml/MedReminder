@@ -15,12 +15,33 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+        }
+    }
+
+    // Load keystore properties from external file
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeType keystoreProperties['storeType']
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
@@ -34,6 +55,21 @@ android {
 
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    kapt {
+        javacOptions {
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED")
+            option("--add-opens", "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED")
+        }
     }
 
     buildFeatures {
@@ -57,6 +93,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+
+    // WorkManager for notifications
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
 
     // Testing
     testImplementation 'junit:junit:4.13.2'

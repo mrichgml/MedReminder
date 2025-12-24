@@ -6,7 +6,7 @@
     <string name="delete_medication">Delete</string>
     <string name="medication_name">Medication Name</string>
     <string name="dosage">Dosage</string>
-    <string name="min_time_between_doses">Min Time Between Doses (minutes)</string>
+    <string name="min_time_between_doses">Min Time Between Doses (hours)</string>
     <string name="max_doses_per_day">Max Doses Per 24 Hours</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -16,4 +16,7 @@
     <string name="dose_not_available">Dose not available</string>
     <string name="no_medications">No medications configured</string>
     <string name="confirm_delete">Are you sure you want to delete this medication?</string>
+    <string name="toggle_countdown_mode">Show Countdown</string>
+    <string name="enable_notifications">Enable notifications when dose is available</string>
+    <string name="use_24_hour_format">Use 24-Hour Format</string>
 </resources>

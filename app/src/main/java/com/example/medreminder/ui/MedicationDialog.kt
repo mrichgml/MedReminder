@@ -2,6 +2,7 @@ package com.example.medreminder.ui
 
 import android.content.Context
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.example.medreminder.R
@@ -22,6 +23,7 @@ class MedicationDialog(
         val etDosage = dialogView.findViewById<EditText>(R.id.etDosage)
         val etMinTime = dialogView.findViewById<EditText>(R.id.etMinTimeBetweenDoses)
         val etMaxDoses = dialogView.findViewById<EditText>(R.id.etMaxDosesPerDay)
+        val cbNotifications = dialogView.findViewById<CheckBox>(R.id.cbEnableNotifications)
 
         // Populate fields if editing
         if (medication != null) {
@@ -29,6 +31,7 @@ class MedicationDialog(
             etDosage.setText(medication.dosage)
             etMinTime.setText(medication.minTimeBetweenDoses.toString())
             etMaxDoses.setText(medication.maxDosesPerDay.toString())
+            cbNotifications.isChecked = medication.notificationsEnabled
         }
 
         val dialog = AlertDialog.Builder(context)
@@ -43,8 +46,9 @@ class MedicationDialog(
         btnSave.setOnClickListener {
             val name = etName.text.toString().trim()
             val dosage = etDosage.text.toString().trim()
-            val minTime = etMinTime.text.toString().toLongOrNull() ?: 0L
+            val minTime = etMinTime.text.toString().toDoubleOrNull() ?: 0.0
             val maxDoses = etMaxDoses.text.toString().toIntOrNull() ?: 0
+            val notificationsEnabled = cbNotifications.isChecked
 
             if (name.isNotEmpty() && dosage.isNotEmpty() && minTime > 0 && maxDoses > 0) {
                 val newMedication = if (medication != null) {
@@ -52,14 +56,16 @@ class MedicationDialog(
                         name = name,
                         dosage = dosage,
                         minTimeBetweenDoses = minTime,
-                        maxDosesPerDay = maxDoses
+                        maxDosesPerDay = maxDoses,
+                        notificationsEnabled = notificationsEnabled
                     )
                 } else {
                     Medication(
                         name = name,
                         dosage = dosage,
                         minTimeBetweenDoses = minTime,
-                        maxDosesPerDay = maxDoses
+                        maxDosesPerDay = maxDoses,
+                        notificationsEnabled = notificationsEnabled
                     )
                 }
                 onSave(newMedication)

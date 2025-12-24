@@ -23,7 +23,7 @@ class DoseAvailabilityChecker {
         }
 
         // Check if minimum time between doses has elapsed
-        val minTimeMs = medication.minTimeBetweenDoses * 60 * 1000
+        val minTimeMs = (medication.minTimeBetweenDoses * 60 * 60 * 1000).toLong()
         val timeSinceLastDose = currentTime - lastDose.timestamp
 
         return timeSinceLastDose >= minTimeMs
@@ -38,7 +38,7 @@ class DoseAvailabilityChecker {
             return 0
         }
 
-        val minTimeMs = medication.minTimeBetweenDoses * 60 * 1000
+        val minTimeMs = (medication.minTimeBetweenDoses * 60 * 60 * 1000).toLong()
         val timeSinceLastDose = currentTime - lastDose.timestamp
 
         return if (timeSinceLastDose < minTimeMs) {

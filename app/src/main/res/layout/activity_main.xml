@@ -24,7 +24,9 @@
             android:id="@+id/btnAddMedication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_medication" />
+            android:text="@string/add_medication"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <TextView
@@ -47,8 +49,7 @@
             android:id="@+id/gridMedications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="4"
+            android:columnCount="1"
             android:padding="8dp" />
     </ScrollView>
 

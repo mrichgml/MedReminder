@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_toggle_countdown"
+        android:title="@string/toggle_countdown_mode"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_toggle_24hour"
+        android:title="@string/use_24_hour_format"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+</menu>
+

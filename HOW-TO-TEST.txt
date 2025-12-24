@@ -1,0 +1,156 @@
+===============================================
+   MEDREMINDER - HOW TO TEST YOUR APP
+===============================================
+
+You said you don't have a green run button. No problem!
+Here's the SIMPLEST way to test your app:
+
+===============================================
+METHOD 1: USE YOUR ANDROID PHONE (5 minutes)
+===============================================
+
+Do you have an Android phone? This is BY FAR the easiest way!
+
+STEP 1: Enable USB Debugging on Your Phone
+-------------------------------------------
+On your phone:
+  Settings → About Phone → Tap "Build Number" 7 times
+  Go back → Settings → Developer Options → Enable "USB Debugging"
+
+STEP 2: Connect Phone to Computer
+----------------------------------
+  Plug in USB cable
+  On phone: Tap "Allow" when asked about USB debugging
+
+STEP 3: Run the App
+-------------------
+  Double-click this file: test-app.bat
+
+  That's it! The app will install and launch automatically!
+
+===============================================
+METHOD 2: INSTALL APK FILE DIRECTLY
+===============================================
+
+Your app is already compiled! Just copy it to your phone:
+
+  1. Copy this file to your phone:
+     D:\Git\Teckon\app\build\outputs\apk\debug\app-debug.apk
+
+  2. On your phone, tap the APK file
+
+  3. Tap "Install"
+
+  Done! Open the MedReminder app from your app drawer.
+
+===============================================
+METHOD 3: USE COMMANDS (if you prefer)
+===============================================
+
+In PowerShell, run these commands one at a time:
+
+1. Check if device is connected:
+
+   C:\Users\mrich\AppData\Local\Android\Sdk\platform-tools\adb.exe devices
+
+2. Install app:
+
+   cd D:\Git\Teckon
+   .\gradlew.bat installDebug
+
+3. Launch app:
+
+   C:\Users\mrich\AppData\Local\Android\Sdk\platform-tools\adb.exe shell am start -n com.example.medreminder/.ui.MainActivity
+
+===============================================
+DON'T HAVE A PHONE? CREATE AN EMULATOR
+===============================================
+
+If you have Android Studio installed:
+
+1. Look for "Device Manager" icon (phone/tablet icon)
+   - Check the right sidebar
+   - Or top toolbar
+   - Or menu: View → Tool Windows → Device Manager
+
+2. Click "Create Device" button
+
+3. Choose "Pixel 4" and click Next
+
+4. Download "API 33" system image and click Next
+
+5. Click Finish
+
+6. Click the Play (▶) button to start emulator
+
+7. Run: test-app.bat
+
+===============================================
+QUICK START CHECKLIST
+===============================================
+
+☐ Do you have an Android phone?
+  → YES: Follow METHOD 1 above (easiest!)
+  → NO: Create an emulator or use METHOD 2 with someone else's phone
+
+☐ Is USB debugging enabled?
+  → Settings → Developer Options → USB Debugging
+
+☐ Is phone connected to computer?
+  → Plug in USB cable
+
+☐ Run the test script:
+  → Double-click: test-app.bat
+
+☐ App should open on your phone!
+
+===============================================
+HELPFUL FILES CREATED FOR YOU
+===============================================
+
+• test-app.bat           - Run this to test your app!
+• view-logs.bat          - See app logs for debugging
+• start-emulator.bat     - Info about emulators
+• TESTING-WITHOUT-STUDIO.md - Full detailed guide
+
+===============================================
+YOUR APP IS READY!
+===============================================
+
+The APK file is already built and ready to install:
+
+Location: D:\Git\Teckon\app\build\outputs\apk\debug\app-debug.apk
+Size: 5.8 MB
+Works on: Android 8.0+ (API 26+)
+
+You can copy this file to ANY Android device and install it!
+
+===============================================
+NEED HELP?
+===============================================
+
+Problem: "No devices found"
+Solution:
+  - Connect your Android phone via USB
+  - Enable USB debugging on phone
+  - Check connection: adb devices
+
+Problem: "Installation failed"
+Solution:
+  - Uninstall old version first
+  - Try again
+
+Problem: "App crashes"
+Solution:
+  - Run: view-logs.bat to see what went wrong
+
+===============================================
+
+THE EASIEST WAY: If you have an Android phone,
+just enable USB debugging, connect it, and
+double-click test-app.bat
+
+That's literally all you need to do!
+
+===============================================
+

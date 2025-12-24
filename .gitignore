@@ -11,3 +11,13 @@ local.properties
 *~
 .env
 .env.local
+
+# Signing keys (DO NOT COMMIT)
+*.jks
+*.keystore
+keystore.properties
+
+# Gradle wrapper binaries
+gradle-8.1-bin.zip
+temp-gradle.zip
+gradle/wrapper/gradle-wrapper.jar
