@@ -1,0 +1,19 @@
+een r<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <text x="24" y="210" fill="#212121" font-family="Arial" font-size="42" font-weight="bold">Edit Medication</text>
+  <rect x="24" y="250" width="672" height="460" rx="12" fill="#FFFFFF" stroke="#BDBDBD"/>
+  <text x="48" y="300" fill="#212121" font-family="Arial" font-size="22">Medication Name</text>
+  <rect x="48" y="320" width="624" height="48" rx="8" fill="#EEEEEE"/>
+  <text x="48" y="390" fill="#212121" font-family="Arial" font-size="22">Dosage</text>
+  <rect x="48" y="410" width="624" height="48" rx="8" fill="#EEEEEE"/>
+  <text x="48" y="480" fill="#212121" font-family="Arial" font-size="22">Min Time Between Doses (hours)</text>
+  <rect x="48" y="500" width="624" height="48" rx="8" fill="#EEEEEE"/>
+  <text x="48" y="570" fill="#212121" font-family="Arial" font-size="22">Max Doses Per 24 Hours</text>
+  <rect x="48" y="590" width="624" height="48" rx="8" fill="#EEEEEE"/>
+  <rect x="48" y="640" width="200" height="44" rx="8" fill="#000"/>
+  <text x="66" y="670" fill="#fff" font-family="Arial" font-size="18">Save</text>
+  <rect x="260" y="640" width="200" height="44" rx="8" fill="#000"/>
+  <text x="276" y="670" fill="#fff" font-family="Arial" font-size="18">Cancel</text>
+  <text x="24" y="1240" fill="#757575" font-family="Arial" font-size="14">Screenshot 2: Add/Edit Medication dialog (example layout)</text>
+</svg>
+

@@ -191,3 +191,21 @@ This project is open source and available under the MIT License.
 ## Support
 
 For issues, questions, or feature requests, please create an issue on GitHub.
+
+## Screenshots
+
+Below are example screenshots/diagrams of the UI (not actual device captures):
+
+- Main screen
+  
+  ![Main screen](docs/images/screenshot-1.svg)
+
+- Add/Edit Medication dialog
+  
+  ![Add/Edit dialog](docs/images/screenshot-2.svg)
+
+## Quick Start (GIF)
+
+A short animation showing the basic workflow (add a medication, take a dose, see countdown/time):
+
+![Quick Start](docs/images/quick-start.gif)
