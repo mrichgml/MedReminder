@@ -209,3 +209,12 @@ Below are example screenshots/diagrams of the UI (not actual device captures):
 A short animation showing the basic workflow (add a medication, take a dose, see countdown/time):
 
 ![Quick Start](docs/images/quick-start.gif)
+
+> Note: If the GIF does not display on your viewer, you can regenerate a minimal placeholder with PowerShell:
+>
+> ```powershell
+> $b='R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+> [IO.File]::WriteAllBytes('docs/images/quick-start.gif',[Convert]::FromBase64String($b))
+> ```
+>
+> The SVG screenshots are layout mocks to illustrate alignment (Add Medication, Edit, Delete on the far right; medication buttons on the left).

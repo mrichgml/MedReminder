@@ -1,16 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280">
   <rect width="100%" height="100%" fill="#FAFAFA"/>
-  <rect x="24" y="80" width="300" height="80" rx="12" fill="#000"/>
-  <text x="48" y="132" fill="#fff" font-family="Arial" font-size="28">Add Medication</text>
+  <!-- Add Medication button aligned to the far right -->
+  <rect x="396" y="80" width="300" height="80" rx="12" fill="#000"/>
+  <text x="420" y="132" fill="#fff" font-family="Arial" font-size="28">Add Medication</text>
   <text x="24" y="210" fill="#212121" font-family="Arial" font-size="42" font-weight="bold">MedReminder</text>
+  <!-- Medication button on left -->
   <rect x="24" y="260" width="220" height="160" rx="10" fill="#F44336"/>
   <text x="40" y="300" fill="#fff" font-family="Arial" font-size="20">COCODAMOL</text>
   <text x="40" y="330" fill="#fff" font-family="Arial" font-size="18">(Taken: 21:38)</text>
   <text x="40" y="360" fill="#fff" font-family="Arial" font-size="18">Earliest Next: 01:38</text>
-  <rect x="280" y="300" width="120" height="48" rx="8" fill="#000"/>
-  <text x="317" y="332" fill="#fff" font-family="Arial" font-size="18">EDIT</text>
-  <rect x="280" y="360" width="120" height="48" rx="8" fill="#000"/>
-  <text x="305" y="392" fill="#fff" font-family="Arial" font-size="18">DELETE</text>
-  <text x="24" y="1240" fill="#757575" font-family="Arial" font-size="14">Screenshot 1: Main screen (example layout)</text>
+  <!-- Edit/Delete aligned to the far right of the row -->
+  <rect x="576" y="300" width="120" height="48" rx="8" fill="#000"/>
+  <text x="613" y="332" fill="#fff" font-family="Arial" font-size="18">EDIT</text>
+  <rect x="576" y="360" width="120" height="48" rx="8" fill="#000"/>
+  <text x="601" y="392" fill="#fff" font-family="Arial" font-size="18">DELETE</text>
+  <text x="24" y="1240" fill="#757575" font-family="Arial" font-size="14">Screenshot 1: Main screen (layout mock)</text>
 </svg>
-
